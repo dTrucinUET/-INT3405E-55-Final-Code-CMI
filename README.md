@@ -25,7 +25,7 @@ We first began by trying basic machine learning model. The function `TrainML` is
     - `y`: return input y again - this is added mainly for developing models and debug process.
     - `optimized_thresholds`: the threshold to convert regression predictions into 4 discrete classes (0,1,2,3). This is optimized by `minimize` function of `spicy` library. 
 
-- We experimented different algorithm:  from tree-based algorithm (`XGBoost`, `CatBoost`, `LGBM`) from libraries with the same name  and  `SVR` from `sklearn` (support vector machine in regression setting). Simply by defining a model and pass into `model_class` argument. `VotingRegressor` for ensembling models was also experimented. 
+- We experimented different algorithm:  from tree-based algorithm (`XGBoost`, `CatBoost`, `LGBM`) from libraries with the same name  and  `SVR` from `sklearn` (support vector machine in regression setting). `VotingRegressor` for ensembling models was also experimented. Simply by defining a model and pass into `model_class` argument. 
 
 
 ### Model improvement
