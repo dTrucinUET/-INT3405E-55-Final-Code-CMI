@@ -4,7 +4,7 @@ Members:
 2. Đặng Đào Xuân Trúc 	- 22028179 - INT3405E 55
 3. Lê Minh Đức 			- 22028267 - INT3405E 56
 
-This is the repository for the project of the Kaggle competition: Child Mind Institute — Problematic Internet Use of group 23 - class INT3405E 55. The description about this competition can be found at: [PIU](https://www.kaggle.com/competitions/child-mind-institute-problematic-internet-use/data). Our slide and representation video can be found here: [Slide](https://docs.google.com/presentation/d/1In22dHS62nNlkajGh_6OJ5vPzRrzyIC6JEGCJMjU55Y/edit?usp=sharing) and [Presentation]()
+This is the repository for the project of the Kaggle competition: Child Mind Institute — Problematic Internet Use of group 23 - class INT3405E 55. The description about this competition can be found at: [PIU](https://www.kaggle.com/competitions/child-mind-institute-problematic-internet-use/data). Our slide and representation video can be found here: [Slide](https://docs.google.com/presentation/d/1In22dHS62nNlkajGh_6OJ5vPzRrzyIC6JEGCJMjU55Y/edit?usp=sharing) and [Presentation](https://drive.google.com/file/d/15DsS9ffl-KoJzHKncgnJjuBdkfB4EqKr/view?usp=drive_link)
 
 ## Final overall pipeline
 
