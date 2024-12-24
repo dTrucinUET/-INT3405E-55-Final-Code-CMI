@@ -4,7 +4,7 @@ Members:
 2. Đặng Đào Xuân Trúc 	- 22028179 - INT3405E 55
 3. Lê Minh Đức 			- 22028267 - INT3405E 56
 
-This is the repository for the project of the Kaggle competition: Child Mind Institute — Problematic Internet Use of group 23 - class INT3405E 55
+This is the repository for the project of the Kaggle competition: Child Mind Institute — Problematic Internet Use of group 23 - class INT3405E 55. The description about this competition can be found at: [PIU](https://www.kaggle.com/competitions/child-mind-institute-problematic-internet-use/data). Our slide and representation video can be found here: [Slide](https://docs.google.com/presentation/d/1In22dHS62nNlkajGh_6OJ5vPzRrzyIC6JEGCJMjU55Y/edit?usp=sharing) and [Presentation]()
 
 ## Final overall pipeline
 
@@ -31,15 +31,24 @@ We first began by trying basic machine learning model. The function `TrainML` is
 ### Model improvement
 
 We improved our models for this competition as progress above. 
-1. Hyperparameters tuning: hyperparameters of machine learning models in every pipeline/setting can be tuned easily using `Optuna` library - but due to the large number of experiments/setting we have conducted, we only an example of hyperparameters tuning of our source code in `pipeline_tuning`:
+1. Hyperparameters tuning: hyperparameters of machine learning models in every pipeline/setting can be tuned easily using `Optuna` library - but due to the large number of experiments/settings we have conducted, we only an example of hyperparameters tuning of our source code in `pipeline_tuning`:
     - Please refer to the `pipeline_tuning` file for the def `objective_sub1` function. `trial.suggest_*` functions in the code (e.g., `trial.suggest_float, trial.suggest_int`) define the hyperparameter space. `Optuna` use Bayesian optimization to searches the hyperparameter space. This a probabilistic approach based on prior evaluations. You can customize this function for your goal but the return output must be a number, the direction of maximizing that score can be `minimize` or `maximize`. 
 2. Feature engineering: 
     - Tabular data: 
-        - First method is simply `SelectKBest` (choosing features with high correlated with the target label). It is defined in `def feature_engineering_v2`.
-        - Second method is using new features created from `FENet` (Please notice that a small number like `1e-6` is added to the denominator to avoid dividing for zero). More details to explain about `FENet` can be found in the comments of the file. New features are created and defined in `def feature_engineering`. 
+        - First method is simply `SelectKBest` (choosing features with high correlated with the target label). It is defined in `def feature_engineering_v2`. This function takes the input as: `df, selector=None, imputer=None, fit=True`. The `df` is the original training features X. The `imputer` is the imputer we used for data preprocessing and `selector` is the function to perform feature selection. We do like this to avoid data leakage: only impute and feature selection on training dataset, after that, use that imputer and selected features on `val` set to avoid data leakage. 
+        - Second method is using new features created from `FENet` (Please notice that a small number like `1e-6` is added to the denominator to avoid dividing for zero). More details to explain about `FENet` can be found in the comments of the file. New features are created and defined in `def feature_engineering`. This is simply creating new features from an existing dataframe, so it only takes an input which is `df` - the train or val dataset.
     - Time series data: 
         - First method is simply using `class AutoEncoder` as many other team do in this competition (we therefore do not explain more about this improvement). The function to perform autoencoder is: `def perform_autoencoder`. 
         - Second method is to create new features about sleep detection - inspired an old competition also held by Child Mind Institute. Justification for this idea can be found in the script (speaker note) of our slide (slide 27 - 28): [Google slides](https://docs.google.com/presentation/d/1TpkzeuvpTdi4k63G_HzPMaGe0ttvqEgNOmZzIlRWby4/edit?usp=sharing). We take the solution of top 4 of the competition [Child Mind Institute - Detect Sleep States](https://www.kaggle.com/competitions/child-mind-institute-detect-sleep-states)
-        - Both methods are implemented in the file `pipeline_FE_timeseries`. The comments to explain in code are provided 
+        - Both methods are implemented in the file `pipeline_FE_timeseries`. The comments to explain in code are provided. 
 
 ### Deep learning approach.
+
+More details about this approach can be found in our slide. We implemented a module consist of masked reconstructed autoencoder to learn to impute the missing data efficiently. Our implementation is in the file `MAE`.
+
+## Progress flow and repository structures:
+
+- `pipeline_tuning`: the file containing the code for Bayesian hyperparameters tuning. You can also  run the simplest baseline here (by commenting/discard the line call the function  `def feature_engineering_v2`). You can change the hyperparameters tuning by defining new range of a machine learning model in the function `def objective_sub1`. Here we take reference of some Kaggle notebook to write on our own. With a similar way, you can easily finetune/hyperparameter searching for other setting/environment.  
+- `pipeline_FE_tabular`: our baseline model with feature engineering technique for tabular data.
+- `pipeline_FE_timeseries`: our baseline model with feature engineering technique for time series data.
+- `pipeline_FE_combine`: combine of both tabular data and time series data. 
